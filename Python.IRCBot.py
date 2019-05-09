@@ -14,7 +14,7 @@ INTRO_MSGS = 3
 NOT_REG_MSGS = 2
 
 '''
-Read from a json file. The file in question is going to be simple. In the form: 
+Read from a json file. The file in question is going to be simple. In the form:
 {
 "host_url":
 "protocol":
@@ -55,7 +55,7 @@ def getRawMessage():
     return ircmsg
 
 '''
-Takes a raw message and refines it 
+Takes a raw message and refines it
 '''
 def getRefinedMessage(messageData):
     if messageData.find("PRIVMSG") != -1:
@@ -72,30 +72,30 @@ def getRefinedMessage(messageData):
 
 '''
 Now start the IRC connection, sign in and go to the desired channel and ignore the
-intro messages 
+intro messages
 '''
 
 import socket
 
-# Set up the connection 
+# Set up the connection
 irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 if (DEBUG):
     print ("Connecting to " + host_url + " on port " + str(port))
 irc.connect((host_url, port))
 
-# Fill in a form with the user name as all fields and set the nickname of our bot 
+# Fill in a form with the user name as all fields and set the nickname of our bot
 if (DEBUG):
     print ("Logging in as " + user_name)
 irc.send(bytes("USER "+ user_name +" "+ user_name +" "+ user_name + " " + user_name
-               + "\n", "UTF-8")) 
+               + "\n", "UTF-8"))
 irc.send(bytes("NICK "+ user_name +"\n", "UTF-8"))
 
 # Join an irc channel
 if (DEBUG):
     print ("Joining channel " + irc_channel)
-irc.send(bytes("JOIN "+ irc_channel +"\n", "UTF-8")) 
- 
-# Cycle through the intro messages and (if debugging) print them 
+irc.send(bytes("JOIN "+ irc_channel +"\n", "UTF-8"))
+
+# Cycle through the intro messages and (if debugging) print them
 for introMessage in range(INTRO_MSGS + NOT_REG_MSGS):
     rawMessage = getRawMessage()
     if (DEBUG):
@@ -103,26 +103,24 @@ for introMessage in range(INTRO_MSGS + NOT_REG_MSGS):
 
 
 '''
-
-Application code here. From this point, you can add code to talk to the target bot
-deal with any responses and deal with them appropriately. For instance you may want
-to implement a 'chatbot' or answer challenge questions (in the case of root-me)
-
+Application code here. From this point, you can add code to talk to the target
+bot deal with any responses and deal with them appropriately. For instance you
+may want to implement a 'chatbot' or answer challenge questions (in the case
+of root-me)
 '''
 
 '''
-Examples 
+Examples
 '''
 
 # send a private message to our target bot
-irc.send(bytes("PRIVMSG "+ bot_name +" :"+ "my message here" +"\n", "UTF-8")) 
+irc.send(bytes("PRIVMSG "+ bot_name +" :"+ "my message here" +"\n", "UTF-8"))
 
 
-# Get a message from the bot 
+# Get a message from the bot
 messageData = getRawMessage()
 if (DEBUG):
     print(messageData)
 name, message = getRefinedMessage(messageData)
 print(name, message)
-
 
