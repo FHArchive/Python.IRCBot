@@ -61,7 +61,7 @@ version.
 
 
 
-## What does this program do for you? 
+## What this program does
 - Read configuration data from a json file ('data.json'). In the form: 
 ```json
 {
@@ -88,8 +88,9 @@ getRefinedMessage(messageData)
 
 ## Add your own application code 
 You can add code to talk to the target bot
-deal with any responses and deal with them appropriately. For instance you may want
-to implement a 'chatbot' or answer challenge questions (in the case of root-me)
+deal with any responses and deal with them appropriately. For instance you may 
+want to implement a 'chatbot' or answer challenge questions (in the case of 
+root-me)
 
 ## Example code
 
